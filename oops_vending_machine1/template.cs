@@ -3,7 +3,7 @@ using VendingApp;
 
 namespace VendingApp
 {
-    internal class Program
+    abstract class Program
     {
         static void Main(string[] args)
         {
@@ -21,8 +21,13 @@ namespace VendingApp
                 Console.WriteLine("5. Режим администратора");
                 Console.WriteLine("0. Выход");
                 Console.Write("Выберите действие: ");
+
+                string? choice = Console.ReadLine();
                 
-                string choice = Console.ReadLine();
+                if (choice == null)
+                {
+                    return;
+                }
                 Console.Clear();
 
                 switch (choice)
@@ -41,7 +46,12 @@ namespace VendingApp
 
                     case "3":
                         Console.Write("Введите название товара: ");
-                        string name = Console.ReadLine();
+                        string? name = Console.ReadLine();
+                        if (name == null)
+                        {
+                            Console.WriteLine("Неверный ввод!");
+                            return;
+                        }
                         vm.GetProduct(name);
                         break;
 
@@ -71,7 +81,12 @@ namespace VendingApp
         {
             Console.Clear();
             Console.Write("Введите пароль администратора: ");
-            string pass = Console.ReadLine();
+            string? pass = Console.ReadLine();
+            if (pass == "")
+                        {
+                            Console.WriteLine("Неверный ввод!");
+                            return;
+                        }
 
             if (pass != "admin123")
             {
@@ -89,14 +104,24 @@ namespace VendingApp
                 Console.WriteLine("3. Собрать деньги");
                 Console.WriteLine("0. Выход из режима");
                 Console.Write("Выберите действие: ");
-                string adminChoice = Console.ReadLine();
+                string? adminChoice = Console.ReadLine();
+                if (adminChoice == "")
+                        {
+                            Console.WriteLine("Неверный ввод!");
+                            return;
+                        }
                 Console.Clear();
 
                 switch (adminChoice)
                 {
                     case "1":
                         Console.Write("Название товара: ");
-                        string name = Console.ReadLine();
+                        string? name = Console.ReadLine();
+                        if (name == "")
+                        {
+                            Console.WriteLine("Неверный ввод!");
+                            return;
+                        }
                         Console.Write("Цена: ");
                         int price = int.Parse(Console.ReadLine());
                         Console.Write("Количество: ");
